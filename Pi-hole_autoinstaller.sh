@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ## Pi-hole_autoinstaller
-# Almost fully automatic Pi-hole installer. A script that helps you install Pi-hole with an admin web interface, several security options and adds a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
+# Almost fully automatic Pi-hole installer. A script that helps you install Pi-hole with an admin web interface, several security options and add a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
 
 ## You will be able to:
-#   - choose whether you want to install the default lighttpd web server or the Nginx web server
-#   - install and enable [cloudflared tunnel for DNS-Over-HTTPS (DOH)
-#   - generate [Self-signed SSL certificate with Diffie-Hellman file and enable HTTPS connection
-#   - add an extra layer of security with basic HTTP authentication
-#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses)
+#   - choose whether you want to install the default lighttpd web server or the [Nginx web server](https://docs.pi-hole.net/guides/webserver/nginx/)
+#   -install and enable [cloudflared tunnel for DNS-Over-HTTPS DOH)](https://docs.pi-hole.net/guides/dns/cloudflared/)
+#   - generate [Self-signed SSL certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) with [Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) file and [enable secure HTTPS connection](https://en.wikipedia.org/wiki/HTTPS)
+#   - add an extra layer of security with [basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses and is still growing):
 
 # Colors:
 #----------------
@@ -90,6 +90,12 @@ case $WTD in
 			echo "         2) armhf (32-bit e.g. Raspberry Pi)"
 			echo "         3) arm64 (64-bit e.g. Raspberry Pi)"
 			echo          
+			# display an architecture
+		echo -e "${CGREEN}Your PCs architecture is:${CEND} "
+		echo -e "-------------------------${CRED}"
+			uname -m
+		echo -e "${CEND}-------------------------------------------------------------------------"
+			echo
 			echo -e "      Binaries for other processor architectures can be found at:\n   ${CGREEN}   https://github.com/cloudflare/cloudflared/releases${CEND}"
 			echo 
 			
@@ -134,7 +140,7 @@ case $WTD in
 		if [[ ! -d /etc/pihole ]]; then
 			mkdir /etc/pihole
 	# download SetupVars for automated instalaltion
-		curl -o /etc/pihole/setupVars.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/setupVars.conf
+		curl -o /etc/pihole/setupVars.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/setupVars.conf
 		fi	
 		
 	# put selected network interface into Pi-hole configuration file
@@ -142,8 +148,8 @@ case $WTD in
 		if [[ ! -d ~/pihole ]]; then
 			mkdir ~/pihole
 		else
-			curl -o ~/pihole/PiHoleBlackLists.txt -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lists/PiHoleBlackLists.txt
-			curl -o ~/pihole/AddLists.sql -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lists/AddLists.sql
+			curl -o ~/pihole/PiHoleBlackLists.txt -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lists/PiHoleBlackLists.txt
+			curl -o ~/pihole/AddLists.sql -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lists/AddLists.sql
 		fi
 				
 	# install Pi-hole, for more installation details go to: https://docs.Pi-hole.net/main/basic-install/
@@ -170,7 +176,7 @@ case $WTD in
 		# check php version and install proper modules for the Pi-hole
 			PHP_VER=$(php -v | grep ^PHP | cut -b 5,6,7)
 			apt install	php$PHP_VER-fpm php$PHP_VER-cgi php$PHP_VER-xml php$PHP_VER-sqlite3 php$PHP_VER-intl php-intl -y
-			curl -o /etc/nginx/sites-available/pihole-nx.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/nginx/pihole-nx.conf
+			curl -o /etc/nginx/sites-available/pihole-nx.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/nginx/pihole-nx.conf
 			sed -i 's/php7.4-fpm/'php$PHP_VER-fpm'/g' /etc/nginx/sites-available/pihole-nx.conf
 			ln -s /etc/nginx/sites-available/pihole-nx.conf /etc/nginx/sites-enabled/
 			echo
@@ -202,7 +208,7 @@ case $WTD in
 					mkdir -p /etc/nginx/ssl
 				fi
 				
-				curl -o /etc/nginx/ssl/ssl-params.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/nginx/ssl-params.conf
+				curl -o /etc/nginx/ssl/ssl-params.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/nginx/ssl-params.conf
 				sed -i 's/#return/return/g' /etc/nginx/sites-available/pihole-nx.conf
 				sed -i 's/#}/}/g' /etc/nginx/sites-available/pihole-nx.conf	
 				sed -i 's/#server/server/g' /etc/nginx/sites-available/pihole-nx.conf
@@ -217,7 +223,7 @@ case $WTD in
 				cat /etc/ssl/private/selfsigned.key /etc/ssl/certs/selfsigned.crt > /etc/ssl/selfsigned.pem
 				apt install	lighttpd-mod-openssl -y
 				#rm -rf /etc/lighttpd/conf-available/*-ssl.conf
-				curl -o /etc/lighttpd/conf-available/08-ssl.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lighttpd/10-ssl.conf
+				curl -o /etc/lighttpd/conf-available/08-ssl.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lighttpd/08-ssl.conf
 				ln -s /etc/lighttpd/conf-available/08-ssl.conf /etc/lighttpd/conf-enabled/
 		# restart lighttpd
 				service lighttpd force-reload
@@ -249,7 +255,7 @@ case $WTD in
 				nginx -t && nginx -s reload
 				sleep 1;
 			else
-				curl -o /etc/lighttpd/conf-available/07-auth.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lighttpd/07-auth.conf
+				curl -o /etc/lighttpd/conf-available/07-auth.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lighttpd/07-auth.conf
 				ln -s /etc/lighttpd/conf-available/07-auth.conf /etc/lighttpd/conf-enabled/
 				echo
 				echo -e "${CGREEN}Checking lighttpd configuration syntax ...${CEND}"
@@ -324,7 +330,7 @@ case $WTD in
 				echo "CLOUDFLARED_OPTS=--port 5053 --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query" > /etc/default/cloudflared
 				chown cloudflared:cloudflared /etc/default/cloudflared
 				chown cloudflared:cloudflared /usr/local/bin/cloudflared
-				curl -o /etc/systemd/system/cloudflared.service -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/cloudflared/cloudflared.service
+				curl -o /etc/systemd/system/cloudflared.service -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/cloudflared/cloudflared.service
 				systemctl enable cloudflared
 				systemctl start cloudflared
 	
@@ -332,7 +338,6 @@ case $WTD in
 				sed -i '/server=1.1.1.1/d' /etc/dnsmasq.d/01-pihole.conf
 				sed -i '/server=1.0.0.1/d' /etc/dnsmasq.d/01-pihole.conf
 				echo "server=127.0.0.1#5053" >> /etc/dnsmasq.d/01-pihole.conf
-				# sed -i '/server=1.0.0.1/server=127.0.0.1#5053/g' /etc/dnsmasq.d/01-pihole.conf
 				sed -i '/PIHOLE_DNS_1=1.1.1.1/d' /etc/pihole/setupVars.conf   
 				sed -i '/PIHOLE_DNS_2=1.0.0.1/d' /etc/pihole/setupVars.conf   
 				echo "PIHOLE_DNS_1=127.0.0.1#5053" >> /etc/pihole/setupVars.conf
@@ -403,8 +408,8 @@ case $WTD in
 		if [[ ! -d ~/pihole ]]; then
 			mkdir ~/pihole
 		else
-			curl -o ~/pihole/PiHoleBlackLists.txt -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lists/PiHoleBlackLists.txt
-			curl -o ~/pihole/AddLists.sql -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstall/main/conf/lists/AddLists.sql
+			curl -o ~/pihole/PiHoleBlackLists.txt -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lists/PiHoleBlackLists.txt
+			curl -o ~/pihole/AddLists.sql -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lists/AddLists.sql
 		fi
 	
 	# make backup of gravity database, add more lists and update again
