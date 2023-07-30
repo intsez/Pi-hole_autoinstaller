@@ -232,23 +232,23 @@ case $WTD in
 	# Generate password for Basic HTTP authentication with openssl
 	# -------------------------------------------------------------
 		if [[ "$HTSA" = 'y' ]]; then
+			echo -e "${CRED}Now you need to set a password for Basic HTTP authentication.${CRED}"
 			echo
-			echo -e "${CGREEN}Now you need to set a password for Basic HTTP authentication."
-			echo
-			echo "To add new users to the Basic HTTP passwords list in the future, type the following commands in terminal. Remember to change your username:${CEND}"
+			echo -e "To add new users to the Basic HTTP passwords list in the future, type the following commands in terminal. Remember to change your username:${CEND}"
 			echo
 			echo "   1) sh -c \"echo -n 'ChangeUserName:' >> /etc/.htpasswd\""
 			echo "   2) sh -c \"openssl passwd -apr1 >> /etc/.htpasswd\""
 			echo 
 			echo 
-			echo -e "${CRED}Please type your name and press enter${CEND}"
+			echo -e "${CREDBG}Please type your name and press enter${CEND}"
 			read  httpusr
 			echo
 			echo -e "Type ${CRED}password for ${httpusr} ${CEND}and press enter"
 			sh -c "echo -n '${httpusr}:' >> /etc/.htpasswd"
 			sh -c "openssl passwd -apr1 >> /etc/.htpasswd"
 			echo 
-			echo -e "${CREDBG}The username and password have been saved in /etc/.htpasswd${CEND}"
+			echo -e "${CRED}The username and password have been saved in /etc/.htpasswd${CEND}"
+			echo
 			sleep 2;
 						
 			if [[ "$INNX" = 'y' ]]; then
