@@ -233,7 +233,14 @@ case $WTD in
 	# -------------------------------------------------------------
 		if [[ "$HTSA" = 'y' ]]; then
 			echo
-			echo -e "${CGREEN}Now you need to set a password for Basic HTTP authentication.${CEND}"
+			echo -e "${CGREEN}Now you need to set a password for Basic HTTP authentication."
+			echo
+			echo "To add new users to the Basic HTTP passwords list in the future, type the following commands in terminal. Remember to change your username:${CEND}"
+			echo
+			echo "   1) sh -c \"echo -n 'ChangeUserName:' >> /etc/.htpasswd\""
+			echo "   2) sh -c \"openssl passwd -apr1 >> /etc/.htpasswd\""
+			echo 
+			echo 
 			echo -e "${CRED}Please type your name and press enter${CEND}"
 			read  httpusr
 			echo
@@ -242,12 +249,7 @@ case $WTD in
 			sh -c "openssl passwd -apr1 >> /etc/.htpasswd"
 			echo 
 			echo -e "${CREDBG}The username and password have been saved in /etc/.htpasswd${CEND}"
-			echo
-			echo "To add new users to the Basic HTTP passwords list, type the following two commands::"
-			echo "   1) sh -c \"echo -n 'ChangeUserName:' >> /etc/.htpasswd\""
-			echo "   2) sh -c \"openssl passwd -apr1 >> /etc/.htpasswd\""
-			echo 
-			sleep 5;
+			sleep 2;
 						
 			if [[ "$INNX" = 'y' ]]; then
 				sed -i 's/#auth_basic/auth_basic/g' /etc/nginx/sites-available/pihole-nx.conf
@@ -364,7 +366,7 @@ case $WTD in
 	# add new lists:
 		sqlite3 /etc/pihole/gravity.db < /root/pihole/AddLists.sql
 		echo
-		sleep 2;
+		sleep 1;
 	# start Pi-hole
 		service pihole-FTL start		
 		systemctl enable pihole-FTL
