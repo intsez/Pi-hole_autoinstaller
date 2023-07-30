@@ -63,7 +63,7 @@ case $WTD in
 				echo 
 				echo -e "The directory ${CREDBG}/etc/pihole has been deleted${CEND}, Pi-hole is not installed. Please ${CREDBG}run the script again${CEND}."
 				echo
-				sleep 1;
+				sleep 2;
 				exit
 			else
 				echo
@@ -232,18 +232,18 @@ case $WTD in
 	# Generate password for Basic HTTP authentication with openssl
 	# -------------------------------------------------------------
 		if [[ "$HTSA" = 'y' ]]; then
-			echo -e "${CRED}Now you need to set a password for Basic HTTP authentication.${CRED}"
+			echo -e "${CRED}Now you need to set a password for Basic HTTP authentication.${CEND}"
 			echo
-			echo -e "To add new users to the Basic HTTP passwords list in the future, type the following commands in terminal. Remember to change your username:${CEND}"
+			echo -e "${CGREEN}To add new users to the Basic HTTP passwords list in the future, type the following commands in terminal. Remember to change your username:${CEND}"
 			echo
 			echo "   1) sh -c \"echo -n 'ChangeUserName:' >> /etc/.htpasswd\""
 			echo "   2) sh -c \"openssl passwd -apr1 >> /etc/.htpasswd\""
 			echo 
 			echo 
-			echo -e "${CREDBG}Please type your name and press enter${CEND}"
+			echo -e "${CREDBG}Please type your username and press enter. This field can not be empty!${CEND}"
 			read  httpusr
 			echo
-			echo -e "Type ${CRED}password for ${httpusr} ${CEND}and press enter"
+			echo -e "Type ${CREDBG}password for ${httpusr} ${CEND}and press enter"
 			sh -c "echo -n '${httpusr}:' >> /etc/.htpasswd"
 			sh -c "openssl passwd -apr1 >> /etc/.htpasswd"
 			echo 
@@ -254,15 +254,17 @@ case $WTD in
 			if [[ "$INNX" = 'y' ]]; then
 				sed -i 's/#auth_basic/auth_basic/g' /etc/nginx/sites-available/pihole-nx.conf
 				nginx -t && nginx -s reload
-				sleep 1;
+				echo
+				sleep 2;
 			else
 				curl -o /etc/lighttpd/conf-available/07-auth.conf -LO https://raw.githubusercontent.com/intsez/Pi-hole_autoinstaller/main/conf/lighttpd/07-auth.conf
 				ln -s /etc/lighttpd/conf-available/07-auth.conf /etc/lighttpd/conf-enabled/
 				echo
-				echo -e "${CGREEN}Checking lighttpd configuration syntax ...${CEND}"
+				echo -e "${CGREEN}Checking lighttpd configuration syntax ..."
 				echo
 				lighttpd -t -f /etc/lighttpd/lighttpd.conf
-				sleep 1;
+				echo -e "${CEND}"
+				sleep 2;
 				systemctl restart lighttpd
 				service lighttpd force-reload
 			fi		
@@ -366,7 +368,7 @@ case $WTD in
 	# add new lists:
 		sqlite3 /etc/pihole/gravity.db < /root/pihole/AddLists.sql
 		echo
-		sleep 1;
+		sleep 2;
 	# start Pi-hole
 		service pihole-FTL start		
 		systemctl enable pihole-FTL
