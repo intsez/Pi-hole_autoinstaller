@@ -8,7 +8,8 @@ Almost fully automatic Pi-hole installer. A script that helps you install Pi-hol
 * add an extra layer of security with [basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 * automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses):
 
-![obraz](https://github.com/intsez/Pi-hole_autoinstall/assets/25661004/a0db070f-095d-41f1-a27a-454510eebe64)
+![obraz](https://github.com/intsez/Pi-hole_autoinstaller/assets/25661004/2c3d4646-bbe2-48fe-b5c4-1dd05380b590)
+
 
 ## The script window/menu
 ![obraz](https://github.com/intsez/Pi-hole_autoinstaller/assets/25661004/5731184b-e436-4f48-9ec2-66f3c3777166)
