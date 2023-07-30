@@ -240,10 +240,10 @@ case $WTD in
 			echo "   2) sh -c \"openssl passwd -apr1 >> /etc/.htpasswd\""
 			echo 
 			echo 
-			echo -e "${CREDBG}Please type your username and press enter. This field can not be empty!${CEND}"
+			echo -e "${CREDBG}Please type your username and press enter. This field cannot be empty!${CEND}"
 			read  httpusr
 			echo
-			echo -e "Type ${CREDBG}password for ${httpusr} ${CEND}and press enter"
+			echo -e "Type ${CREDBG}password for ${httpusr}${CEND}and press enter"
 			sh -c "echo -n '${httpusr}:' >> /etc/.htpasswd"
 			sh -c "openssl passwd -apr1 >> /etc/.htpasswd"
 			echo 
