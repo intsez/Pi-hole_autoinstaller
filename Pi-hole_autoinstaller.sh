@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ## Pi-hole_autoinstaller
-# Almost fully automatic Pi-hole installer. A script that helps you install Pi-hole with an admin web interface, several security options and add a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
+# Almost fully automatic Pi-hole installer. This script helps you to install Pi-hole with an admin web interface, several security options and add a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
 
 ## You will be able to:
 #   - choose whether you want to install the default lighttpd web server or the Nginx web server(https://docs.pi-hole.net/guides/webserver/nginx/)
-#   -install and enable cloudflared tunnel for DNS-Over-HTTPS DOH)(https://docs.pi-hole.net/guides/dns/cloudflared/)
-#   - generate Self-signed SSL certificate(https://en.wikipedia.org/wiki/Self-signed_certificate) with Diffie-Hellman file (https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) and enable secure HTTPS connection(https://en.wikipedia.org/wiki/HTTPS)
+#   - install and enable cloudflared tunnel for DNS-Over-HTTPS DOH)(https://docs.pi-hole.net/guides/dns/cloudflared/)
+#   - generate a Self-signed SSL certificate(https://en.wikipedia.org/wiki/Self-signed_certificate) with Diffie-Hellman file (https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) and enable HTTPS connection(https://en.wikipedia.org/wiki/HTTPS)
 #   - add an extra layer of security with basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
-#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses):
+#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million):
 
 # Colors:
 #----------------
@@ -40,8 +40,8 @@ echo -e " Donate Pi-hole at https://Pi-hole.net/donate/#donate ${CREDBG}(highly 
 echo "---------------------------------------------------------------------------"
 echo
 echo -e "${CGREEN}What would you like to do?${CEND}"
-echo "   1) Install Pi-hole and increase security with several improvements."
-echo "   2) Add only a huge number of domains/hosts to the Pi-hole blacklist."
+echo "   1) Install Pi-hole and add some basic security features."
+echo "   2) Boost your Pi-Hole blacklist with a huge list of hosts and domains."
 echo "   3) Exit"
 echo
 
@@ -92,9 +92,9 @@ case $WTD in
 			echo "         3) arm64 (64-bit e.g. Raspberry Pi)"
 			echo          
 			# display an architecture
-			echo -e "         -----------------------------------${CRED}"
-			echo -e "${CGREEN}          Your PC's architecture is:${CEND} ${CREDBG}$(uname -m)${CEND}"
-			echo -e "         -----------------------------------"
+			echo -e "         ----------------------------------${CRED}"
+			echo -e "${CGREEN}          Your device architecture:${CEND} ${CREDBG}$(uname -m)${CEND}"
+			echo -e "         ----------------------------------"
 			echo 
 			echo -e "      Binaries for other processor architectures can be found at:\n   ${CGREEN}   https://github.com/cloudflare/cloudflared/releases${CEND}"
 			echo
