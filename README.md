@@ -11,7 +11,7 @@ Almost fully automatic Pi-hole installer. A script that helps you install Pi-hol
 ![obraz](https://github.com/intsez/Pi-hole_autoinstall/assets/25661004/a0db070f-095d-41f1-a27a-454510eebe64)
 
 ## The script window/menu
-![obraz](https://github.com/intsez/Pi-hole_autoinstall/assets/25661004/102c06ff-1264-4fc6-9ecf-62b5a4baa3f9)
+![obraz](https://github.com/intsez/Pi-hole_autoinstaller/assets/25661004/5731184b-e436-4f48-9ec2-66f3c3777166)
 
 ## Usage
 Just download and execute the script :
