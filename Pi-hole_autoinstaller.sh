@@ -4,11 +4,11 @@
 # Almost fully automatic Pi-hole installer. A script that helps you install Pi-hole with an admin web interface, several security options and add a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
 
 ## You will be able to:
-#   - choose whether you want to install the default lighttpd web server or the [Nginx web server](https://docs.pi-hole.net/guides/webserver/nginx/)
-#   -install and enable [cloudflared tunnel for DNS-Over-HTTPS DOH)](https://docs.pi-hole.net/guides/dns/cloudflared/)
-#   - generate [Self-signed SSL certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) with [Diffie-Hellman](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) file and [enable secure HTTPS connection](https://en.wikipedia.org/wiki/HTTPS)
-#   - add an extra layer of security with [basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
-#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses and is still growing):
+#   - choose whether you want to install the default lighttpd web server or the Nginx web server(https://docs.pi-hole.net/guides/webserver/nginx/)
+#   -install and enable cloudflared tunnel for DNS-Over-HTTPS DOH)(https://docs.pi-hole.net/guides/dns/cloudflared/)
+#   - generate Self-signed SSL certificate(https://en.wikipedia.org/wiki/Self-signed_certificate) with Diffie-Hellman file (https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange) and enable secure HTTPS connection(https://en.wikipedia.org/wiki/HTTPS)
+#   - add an extra layer of security with basic HTTP authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+#   - automatically add a huge number of frequently updated hosts/domains to the Pi-hole blacklist (over 11 million addresses):
 
 # Colors:
 #----------------
@@ -85,24 +85,23 @@ case $WTD in
 		done		
 		
 		if [[ "$DOH" = 'y' ]]; then
+		echo
 			echo -e "${CGREEN}  Please select an architecture:${CEND}"
 			echo "         1) AMD64 (most modern devices)"
 			echo "         2) armhf (32-bit e.g. Raspberry Pi)"
 			echo "         3) arm64 (64-bit e.g. Raspberry Pi)"
 			echo          
 			# display an architecture
-		echo -e "${CGREEN}Your PCs architecture is:${CEND} "
-		echo -e "-------------------------${CRED}"
-			uname -m
-		echo -e "${CEND}-------------------------------------------------------------------------"
-			echo
-			echo -e "      Binaries for other processor architectures can be found at:\n   ${CGREEN}   https://github.com/cloudflare/cloudflared/releases${CEND}"
+			echo -e "         -----------------------------------${CRED}"
+			echo -e "${CGREEN}          Your PC's architecture is:${CEND} ${CREDBG}$(uname -m)${CEND}"
+			echo -e "         -----------------------------------"
 			echo 
-			
+			echo -e "      Binaries for other processor architectures can be found at:\n   ${CGREEN}   https://github.com/cloudflare/cloudflared/releases${CEND}"
+			echo
 			while [[ $ARCH !=  "1" && $ARCH != "2" && $ARCH != "3" ]]; do
 				read -rp "      Your choice is [1-3]: " -e ARCH
 			done
-		echo
+			echo
 		fi
 	# generate and configure self-Signed SSL
 		while [[ $GSSL != "y" && $GSSL != "n" ]]; do
@@ -186,7 +185,7 @@ case $WTD in
 			rm -rf /etc/nginx/sites-enabled/default
 			echo -e "${CGREEN}"
 			nginx -t && nginx -s reload
-			echo - "${CEND}"					
+			echo -e "${CEND}"					
 			sleep 2;
 		fi			
 				
@@ -217,7 +216,7 @@ case $WTD in
 				sed -i 's/#include/include/g' /etc/nginx/sites-available/pihole-nx.conf
 				echo -e "${CGREEN}"
 				nginx -t && nginx -s reload
-				echo - "${CEND}"
+				echo -e "${CEND}"
 			else
 		# lighttpd SSL instructions
 				cat /etc/ssl/private/selfsigned.key /etc/ssl/certs/selfsigned.crt > /etc/ssl/selfsigned.pem
