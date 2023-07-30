@@ -1,5 +1,5 @@
 ## Pi-hole_autoinstaller
-Almost fully automatic Pi-hole installer. A script that helps you install Pi-hole with an admin web interface, several security options and adds a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
+A script that helps you install Pi-hole with an admin web interface, several security options and adds a huge number of frequently updated hosts/domains to the Pi-hole blacklist. All this with minimal user interaction.
 
 ## You will be able to:
 * choose whether you want to install the default lighttpd web server or the [Nginx web server](https://docs.pi-hole.net/guides/webserver/nginx/)
