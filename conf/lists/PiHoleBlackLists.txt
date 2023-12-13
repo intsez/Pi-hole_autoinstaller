@@ -216,8 +216,6 @@ https://raw.githubusercontent.com/chadmayfield/pihole-blocklists/master/lists/pi
 https://raw.githubusercontent.com/AlRFORCE1/PiHoleRepositorys/master/regex.list
 #SEFINEK Blocklist https://github.com/sefinek24/Sefinek-Blocklist-Collection
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/DandelionSprout.GameConsoleAdblockList.txt
-https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/TheBlockListProject.AdsList.txt
-https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/blocklistproject.AdsList.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/jerryn70.GoodbyeAds.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/blocklistproject.ads.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/ads/yoyo.AdsTrackersEtc.txt
@@ -246,10 +244,7 @@ https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/bl
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/sites/riotgames.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/sites/youtube-extended.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/sites/youtube.txt
-https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/fraud.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/gambling.txt
-https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/phishing.txt
-https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/web-attacks.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/porn.txt
 https://raw.githubusercontent.com/sefinek24/Sefinek-Blocklist-Collection/main/blocklist/generated/0.0.0.0/useless-websites.txt
 # mobiletrackers
