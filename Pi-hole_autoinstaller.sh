@@ -168,7 +168,7 @@ case $WTD in
 				echo 
 				service lighttpd stop
 				systemctl disable lighttpd
-				apt --purge autoremove lighttpd*
+				apt --purge autoremove lighttpd* -y
 				apt install nginx nginx-common -y
 			fi
 			
