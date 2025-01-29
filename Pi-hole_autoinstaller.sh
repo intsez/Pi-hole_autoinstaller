@@ -55,7 +55,7 @@ case $WTD in
 		if [[ -d /etc/pihole ]]; then
 			while [[ $UNPIHOLE !=  "y" && $UNPIHOLE != "n" ]]; do
 			echo
-				read -p "It looks like directory /etc/pihole exists. Delete it for you [Y/n]?: " -e UNPIHOLE
+				read -p "It looks like directory /etc/pihole exists. Delete it for you [y/n]?: " -e -i y UNPIHOLE
 			done
 			if [[ "$UNPIHOLE" = 'y' ]]; then
 				pihole uninstall
